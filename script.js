@@ -1,35 +1,53 @@
-const choices = ["R", "P", "S"];
-const win = 0;
-const lose = 0;
-const tie = 0;
+let choices = ["R", "P", "S"];
+let win = 0;
+let lose = 0;
+let tie = 0;
 
 // should greet the user with a message that says "Hi! Play Rock, Paper or Scissors with me pleeaase? If you DARE!"
-alert("Hi! Play Rock, Paper or Scissors with me pleeaase? If you DARE!");
+const firstAlert = alert(
+  "Hi! Play Rock, Paper or Scissors with me pleeaase? If you DARE!"
+);
 
-// then you click ok and it gives you an alert that says "pick r, p or s" 
-const userChoice = prompt("Choose 'R', 'P', or 'S':")
+const rpsGame = () => {
+  // then you click ok and it gives you an alert that says "pick r, p or s"
+  const userChoice = window.prompt("Choose 'R', 'P', or 'S':").toUpperCase();
 
-// you type it in and press enter it validates that you gave it a valid response, if not it puts an alert up, if so then goes to next action
+  // if user presses cancel then game ends
+  if (!userChoice) {
+    return;
+  }
 
+  // you type it in and press enter it validates that you gave it a valid response, if not it puts an alert up, if so then goes to next action
 
-// computer makes a choice
-const getComputerChoice = () => {
-  let randomNumber = Math.floor(Math.random() * 3);
-  return choices[randomNumber];
+  // computer makes a choice
+
+  let randomNumber = Math.floor(Math.random() * choices.length);
+  let compChoice = choices[randomNumber];
+
+  window.alert("The Computer chose " + compChoice);
+
+  if (userChoice === compChoice) {
+    tie++;
+    window.alert("You Tied!");
+  } else if (
+    (userChoice === "P" && compChoice === "R") ||
+    (userChoice === "S" && compChoice === "P") ||
+    (userChoice === "R" && compChoice === "R")
+  ) {
+    win++;
+    window.alert("You Win!!");
+  } else {
+    lose++;
+    window.alert("You Lose!! HAHAHAHA!");
+  }
+
+  window.alert("Stats:\nWins: " + win + "\nLosses: " + lose + "\nTies: " + tie);
+
+  const again = window.confirm("Would you like to play again?");
+
+  if (again) {
+    rpsGame();
+  }
 };
 
-getComputerChoice();
-
-//it runs your choice against computers choice and says win or lose and tallies the win, lose or tie
-if ()
-
-// confirm pops up and asks if you want to play again
-
-
-//    if cancel then looks to see whos score is higher and announces winner
-
-
-//    if ok then restarts alert and game
-
-
-
+rpsGame();
